@@ -12,7 +12,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="image" href="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Deferred external scripts -->
 <script src="https://unpkg.com/lucide@latest" defer></script>
@@ -21,22 +21,21 @@
 <style>
 :root {
   --bg: #0c0e12;
-  --bg2: #0c0e12;
-  --bg3: #121826;
-  --surface: #1a2030;
-  --border: #1e2638;
-  --border2: #2a3348;
-  --text: #ffffff;
-  --text2: #8892a8;
-  --text3: #4a5470;
+  --bg2: #121620;
+  --bg3: #161b26;
+  --surface: #1e2433;
+  --border: #232a3b;
+  --border2: #2e374d;
+  --text: #f1f5f9;
+  --text2: #94a3b8;
+  --text3: #64748b;
   --accent: #3b82f6;
-  --accent-glow: rgba(59, 130, 246, 0.12);
-  --gradient: linear-gradient(135deg, #e94db3, #a855f7);
-  --gradient-blue: linear-gradient(135deg, #3b82f6, #2563eb);
-  --radius: 14px;
-  --radius-sm: 10px;
-  --radius-lg: 22px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --gradient-blue: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 18px;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { font-size: 16px; scroll-behavior: smooth; -webkit-font-smoothing: antialiased; background: var(--bg); color: var(--text); font-family: var(--font); overflow-x: hidden; min-height: 100vh; }
@@ -45,155 +44,166 @@ button { font: inherit; color: inherit; border: none; background: none; cursor: 
 input, textarea, select { font: inherit; color: inherit; border: none; background: none; outline: none; }
 a { color: inherit; text-decoration: none; }
 ::selection { background: rgba(59, 130, 246, 0.3); }
-::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 8px; }
+
+/* Global Grey Underline Links */
+.grey-link {
+  color: var(--text2);
+  text-decoration: underline;
+  text-decoration-color: var(--text3);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+  cursor: pointer;
+}
+.grey-link:hover {
+  color: var(--text);
+  text-decoration-color: var(--text2);
+}
 
 /* Loading Screen */
 #loadingOverlay { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--bg); transition: opacity 0.35s ease, visibility 0.35s ease; }
 #loadingOverlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-.loading-logo { width: 64px; height: 64px; border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; animation: pulse 1.8s ease-in-out infinite; }
+.loading-logo { width: 56px; height: 56px; border-radius: var(--radius); overflow: hidden; margin-bottom: 16px; }
 .loading-logo img { width: 100%; height: 100%; object-fit: contain; }
-.loading-text { font-size: 18px; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 2px; }
-.loading-sub { font-size: 11px; color: var(--text2); margin-bottom: 14px; letter-spacing: .2px; }
-.loading-track { width: 160px; height: 3px; background: var(--border2); border-radius: 2px; overflow: hidden; }
-.loading-track-inner { height: 100%; background: var(--gradient); border-radius: 2px; width: 0%; transition: width 0.25s cubic-bezier(.16,1,.3,1); }
-@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+.loading-text { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 4px; letter-spacing: -0.3px; }
+.loading-sub { font-size: 12px; color: var(--text2); margin-bottom: 16px; }
+.loading-track { width: 160px; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.loading-track-inner { height: 100%; background: var(--accent); border-radius: 2px; width: 0%; transition: width 0.25s cubic-bezier(.16,1,.3,1); }
 
 /* Header */
-.header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 10px 28px; background: rgba(12, 14, 18, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
-.h-left { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 12px 28px; background: rgba(12, 14, 18, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+.h-left { display: flex; align-items: center; gap: 12px; cursor: pointer; }
 .h-logo { width: 28px; height: 28px; border-radius: 6px; overflow: hidden; }
-.h-brand { font-size: 16px; font-weight: 700; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -.2px; }
-.hamburger { display: none; width: 32px; height: 32px; border-radius: var(--radius-sm); align-items: center; justify-content: center; color: var(--text2); border: 1px solid var(--border2); }
-.h-nav { display: flex; align-items: center; gap: 16px; }
-.h-nav a { font-size: 12px; font-weight: 500; color: var(--text2); cursor: pointer; transition: color 0.25s ease; padding: 4px 0; }
+.h-brand { font-size: 15px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+.hamburger { display: none; width: 32px; height: 32px; border-radius: var(--radius-sm); align-items: center; justify-content: center; color: var(--text2); border: 1px solid var(--border); }
+.h-nav { display: flex; align-items: center; gap: 20px; }
+.h-nav a { font-size: 13px; font-weight: 500; color: var(--text2); cursor: pointer; transition: color 0.2s ease; }
 .h-nav a:hover, .h-nav a.active { color: var(--text); }
-.h-actions { display: flex; align-items: center; gap: 8px; }
-.h-btn { padding: 7px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; transition: all 0.25s ease; }
-.h-btn.primary { background: var(--gradient); color: #fff; box-shadow: 0 2px 14px var(--accent-glow); }
-.h-btn.primary:hover { opacity: 0.92; transform: translateY(-1px); }
-.h-btn.ghost { color: var(--text2); border: 1px solid var(--border2); }
-.h-btn.ghost:hover { border-color: var(--accent); color: var(--text); }
-.u-badge { display: flex; align-items: center; gap: 8px; padding: 3px 10px 3px 3px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); cursor: pointer; }
-.u-badge .ub-av { width: 24px; height: 24px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; overflow: hidden; object-fit: cover; }
-.u-badge .ub-nm { font-size: 11px; font-weight: 500; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.h-actions { display: flex; align-items: center; gap: 10px; }
+.h-btn { padding: 7px 16px; border-radius: var(--radius-sm); font-size: 12px; font-weight: 600; transition: all 0.2s ease; }
+.h-btn.primary { background: var(--accent); color: #fff; box-shadow: 0 2px 10px var(--accent-glow); }
+.h-btn.primary:hover { opacity: 0.95; }
+.h-btn.ghost { color: var(--text2); border: 1px solid var(--border); }
+.h-btn.ghost:hover { border-color: var(--border2); color: var(--text); }
+.u-badge { display: flex; align-items: center; gap: 8px; padding: 4px 10px 4px 4px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); cursor: pointer; }
+.u-badge .ub-av { width: 24px; height: 24px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #fff; overflow: hidden; object-fit: cover; }
+.u-badge .ub-nm { font-size: 12px; font-weight: 500; max-width: 90px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
 /* Mobile Sidebar */
-.sb-overlay { position: fixed; inset: 0; z-index: 199; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: all 0.25s ease; }
+.sb-overlay { position: fixed; inset: 0; z-index: 199; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); opacity: 0; visibility: hidden; transition: all 0.25s ease; }
 .sb-overlay.show { opacity: 1; visibility: visible; }
 .sidebar { position: fixed; top: 0; left: -280px; width: 280px; max-width: calc(100vw - 32px); height: 100vh; background: var(--bg); border-right: 1px solid var(--border); z-index: 200; overflow-y: auto; padding: 20px; transition: left 0.3s cubic-bezier(.16,1,.3,1); display: flex; flex-direction: column; justify-content: space-between; }
 .sidebar.open { left: 0; }
 .sb-hd { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
 .sb-sec { margin-bottom: 20px; }
-.sb-sec h4 { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; padding: 0 6px; }
-.sb-links a { display: block; padding: 8px 10px; font-size: 13px; color: var(--text2); border-radius: var(--radius-sm); margin-bottom: 2px; transition: all 0.25s ease; }
+.sb-sec h4 { font-size: 10px; font-weight: 600; color: var(--text3); text-transform: uppercase; letter-spacing: 1.2px; margin-bottom: 8px; padding: 0 6px; }
+.sb-links a { display: block; padding: 8px 10px; font-size: 13px; color: var(--text2); border-radius: var(--radius-sm); margin-bottom: 2px; transition: all 0.2s ease; }
 .sb-links a:hover, .sb-links a.active { color: var(--text); background: var(--surface); }
 
 /* Application Views Wrapper */
-.app-view { display: none; padding-top: 60px; min-height: calc(100vh - 60px); }
+.app-view { display: none; padding-top: 57px; min-height: calc(100vh - 57px); }
 .app-view.active { display: block; }
 
 /* Generic UI Components */
 .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
-.btn { padding: 10px 20px; border-radius: 999px; font-size: 13px; font-weight: 600; transition: all 0.25s ease; display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
-.btn.primary { background: var(--gradient); color: #fff; box-shadow: 0 4px 20px var(--accent-glow); }
-.btn.primary:hover { opacity: 0.92; transform: translateY(-1px); }
-.btn.secondary { background: var(--surface); border: 1px solid var(--border2); color: var(--text); }
-.btn.secondary:hover { border-color: var(--accent); }
-.card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
+.btn { padding: 9px 18px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.btn.primary { background: var(--accent); color: #fff; box-shadow: 0 2px 10px var(--accent-glow); }
+.btn.primary:hover { opacity: 0.92; }
+.btn.secondary { background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+.btn.secondary:hover { border-color: var(--border2); }
+.card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; }
 
-/* Auth */
-.auth-page { min-height: calc(100vh - 60px); display: flex; align-items: center; justify-content: center; padding: 20px; }
-.auth-card { width: 100%; max-width: 360px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; text-align: center; }
-.a-field { margin-bottom: 14px; text-align: left; }
-.a-field label { display: block; font-size: 11px; font-weight: 500; color: var(--text2); margin-bottom: 4px; }
-.a-field input, .a-field select, .a-field textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; color: var(--text); background: var(--bg3); transition: border-color 0.25s ease; }
+/* Auth Views */
+.auth-page { min-height: calc(100vh - 57px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+.auth-card { width: 100%; max-width: 380px; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px 28px; text-align: left; }
+.a-header { margin-bottom: 24px; }
+.a-header h2 { font-size: 20px; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.3px; }
+.a-header p { font-size: 13px; color: var(--text2); }
+.a-field { margin-bottom: 16px; text-align: left; }
+.a-field label { display: block; font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
+.a-field input, .a-field select, .a-field textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; color: var(--text); background: var(--bg); transition: border-color 0.2s ease; }
 .a-field input:focus, .a-field select:focus { border-color: var(--accent); }
-.a-err { color: #ef4444; font-size: 12px; margin-bottom: 12px; display: none; background: rgba(239, 68, 68, 0.1); padding: 8px; border-radius: var(--radius-sm); text-align: left; }
-.a-btn { width: 100%; margin-top: 8px; }
+.a-err { color: #f87171; font-size: 12px; margin-bottom: 14px; display: none; background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: var(--radius-sm); border: 1px solid rgba(239, 68, 68, 0.2); }
+.a-btn { width: 100%; margin-top: 4px; }
+.auth-footer { font-size: 12px; color: var(--text2); margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
 
-/* Landing / Home */
+/* Home / Landing */
 .hero { text-align: center; padding: 80px 20px 60px; display: flex; flex-direction: column; align-items: center; }
-.hero-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border2); font-size: 12px; color: #3b82f6; margin-bottom: 20px; }
-.hero h1 { font-size: clamp(36px, 6vw, 64px); font-weight: 800; line-height: 1.1; margin-bottom: 20px; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.hero p { font-size: 16px; color: var(--text2); max-width: 580px; margin-bottom: 32px; line-height: 1.6; }
-.hero-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); font-size: 12px; font-weight: 500; color: var(--accent); margin-bottom: 24px; }
+.hero h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.15; margin-bottom: 18px; color: var(--text); letter-spacing: -1px; }
+.hero p { font-size: 15px; color: var(--text2); max-width: 580px; margin-bottom: 32px; line-height: 1.6; }
+.hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-/* Mobile First Chat Layout Component */
-.m-chat-layout { max-width: 480px; margin: 0 auto; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; height: calc(100vh - 120px); min-height: 540px; position: relative; }
+/* High Quality Full Workspace Chat Interface */
+.chat-workspace { display: flex; height: calc(100vh - 57px); background: var(--bg); border-top: 1px solid var(--border); }
+.chat-sidebar { width: 300px; background: var(--bg2); border-right: 1px solid var(--border); display: flex; flex-direction: column; flex-shrink: 0; }
+.cs-header { padding: 16px; border-bottom: 1px solid var(--border); }
+.cs-search { position: relative; margin-top: 12px; }
+.cs-search input { width: 100%; padding: 8px 12px 8px 32px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 12px; color: var(--text); }
+.cs-search i { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; color: var(--text3); }
+.cs-filters { display: flex; gap: 6px; padding: 10px 16px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+.cs-filter-btn { padding: 4px 10px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 500; color: var(--text2); background: var(--bg); border: 1px solid var(--border); white-space: nowrap; }
+.cs-filter-btn.active { background: var(--surface); color: var(--text); border-color: var(--border2); }
+.cs-list { flex: 1; overflow-y: auto; padding: 8px; display: flex; flex-direction: column; gap: 2px; }
+.cs-item { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.15s ease; }
+.cs-item:hover, .cs-item.active { background: var(--surface); }
+.cs-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--border2); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; color: var(--text); position: relative; flex-shrink: 0; }
+.cs-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.cs-status { position: absolute; bottom: 0; right: 0; width: 9px; height: 9px; border-radius: 50%; background: #10b981; border: 2px solid var(--bg2); }
+.cs-info { flex: 1; min-width: 0; }
+.cs-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
+.cs-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cs-time { font-size: 10px; color: var(--text3); }
+.cs-preview { font-size: 12px; color: var(--text2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-/* Workspace Selector Dropdown */
-.ws-selector { position: relative; padding: 12px 16px; border-bottom: 1px solid var(--border); }
-.ws-btn { display: flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; color: var(--text); cursor: pointer; }
-.ws-dropdown { display: none; position: absolute; top: 100%; left: 16px; width: 200px; background: #121826; border: 1px solid var(--border); border-radius: var(--radius-sm); z-index: 50; box-shadow: 0 4px 20px rgba(0,0,0,0.5); overflow: hidden; }
-.ws-dropdown.show { display: block; }
-.ws-item { padding: 10px 14px; font-size: 13px; color: var(--text); cursor: pointer; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
-.ws-item:last-child { border-bottom: none; }
-.ws-item:hover { background: var(--surface); }
+/* Main Chat Area */
+.chat-main { flex: 1; display: flex; flex-direction: column; background: var(--bg); }
+.cm-header { padding: 14px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; background: var(--bg2); }
+.cm-title-wrap { display: flex; align-items: center; gap: 12px; }
+.cm-title { font-size: 14px; font-weight: 600; color: var(--text); }
+.cm-status-text { font-size: 11px; color: var(--text2); display: flex; align-items: center; gap: 6px; }
+.cm-status-text::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; }
+.cm-actions { display: flex; items-center; gap: 12px; }
+.cm-icon-btn { color: var(--text2); padding: 6px; border-radius: var(--radius-sm); transition: color 0.15s ease; }
+.cm-icon-btn:hover { color: var(--text); background: var(--surface); }
 
-/* Search Bar */
-.chat-search-wrap { padding: 10px 16px; }
-.chat-search-input { width: 100%; padding: 8px 14px; background: #121826; border: 1px solid var(--border); border-radius: 999px; font-size: 13px; color: var(--text); }
-.chat-search-input::placeholder { color: var(--text3); }
+.cm-messages { flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+.chat-bubble-group { display: flex; flex-direction: column; max-width: 70%; }
+.chat-bubble-group.me { align-self: flex-end; align-items: flex-end; }
+.chat-bubble-group.them { align-self: flex-start; align-items: flex-start; }
+.chat-bubble-meta { font-size: 10px; color: var(--text3); margin-bottom: 4px; display: flex; gap: 8px; }
+.chat-bubble { padding: 10px 14px; border-radius: var(--radius); font-size: 13px; line-height: 1.5; word-break: break-word; }
+.chat-bubble-group.me .chat-bubble { background: var(--accent); color: #ffffff; border-bottom-right-radius: 2px; }
+.chat-bubble-group.them .chat-bubble { background: var(--surface); color: var(--text); border: 1px solid var(--border); border-bottom-left-radius: 2px; }
 
-/* Filter Tabs Horizontal Bar */
-.filter-bar { display: flex; align-items: center; justify-content: space-between; padding: 4px 16px 10px; border-bottom: 1px solid var(--border); gap: 10px; }
-.filter-tabs { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
-.filter-tabs::-webkit-scrollbar { display: none; }
-.filter-pill { padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 500; background: #121826; color: var(--text2); white-space: nowrap; cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent; }
-.filter-pill.active { background: #3b82f6; color: #ffffff; }
-.mark-read-link { font-size: 11px; color: #3b82f6; white-space: nowrap; cursor: pointer; }
+.cm-input-area { padding: 16px 24px; border-top: 1px solid var(--border); background: var(--bg2); }
+.cm-input-box { display: flex; align-items: flex-end; gap: 10px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; }
+.cm-input-box:focus-within { border-color: var(--accent); }
+.cm-input-box textarea { flex: 1; border: none; background: transparent; font-size: 13px; color: var(--text); resize: none; max-height: 120px; min-height: 24px; line-height: 1.4; padding: 4px 0; }
+.cm-input-actions { display: flex; align-items: center; gap: 6px; padding-bottom: 2px; }
 
-/* Chat List Area */
-.m-chat-list { flex: 1; overflow-y: auto; padding: 8px 12px; display: flex; flex-direction: column; gap: 4px; }
-.m-chat-row { display: flex; align-items: center; gap: 12px; padding: 10px; border-radius: var(--radius-sm); cursor: pointer; transition: background 0.2s ease; position: relative; }
-.m-chat-row:hover, .m-chat-row.active { background: #121826; }
-.avatar-wrap { position: relative; width: 42px; height: 42px; flex-shrink: 0; }
-.avatar-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; background: var(--surface); }
-.unread-dot { position: absolute; top: 0; right: 0; width: 10px; height: 10px; background: #3b82f6; border: 2px solid var(--bg); border-radius: 50%; }
-.m-chat-info { flex: 1; min-width: 0; }
-.m-chat-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2px; }
-.m-chat-title { font-weight: bold; color: #ffffff; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.m-chat-time { font-size: 11px; color: #3b82f6; flex-shrink: 0; }
-.m-chat-preview { font-style: italic; color: #8892a8; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* Real Documentation Engine Styling */
+.docs-layout { display: flex; gap: 32px; margin-top: 24px; }
+.docs-sidebar { width: 220px; flex-shrink: 0; }
+.docs-menu { display: flex; flex-direction: column; gap: 4px; position: sticky; top: 80px; }
+.docs-menu-item { font-size: 13px; color: var(--text2); padding: 6px 12px; border-radius: var(--radius-sm); transition: all 0.15s ease; cursor: pointer; }
+.docs-menu-item:hover, .docs-menu-item.active { color: var(--text); background: var(--surface); }
+.docs-content { flex: 1; min-width: 0; }
+.docs-section { margin-bottom: 40px; padding-bottom: 30px; border-bottom: 1px solid var(--border); }
+.docs-section h2 { font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 12px; letter-spacing: -0.3px; }
+.docs-section h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 20px 0 10px; }
+.docs-section p { font-size: 14px; color: var(--text2); line-height: 1.6; margin-bottom: 12px; }
+.code-block { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px; font-family: monospace; font-size: 12px; color: var(--text); overflow-x: auto; margin: 12px 0; }
 
-/* Special Button Elements */
-.new-shape-btn { width: 100%; padding: 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-weight: 600; font-size: 13px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: auto; margin-bottom: 8px; cursor: pointer; }
-.new-shape-btn:hover { border-color: #3b82f6; }
-
-/* Conversation View Active Screen */
-.m-chat-view { display: none; flex-direction: column; height: 100%; position: absolute; inset: 0; background: var(--bg); z-index: 10; }
-.m-chat-view.active { display: flex; }
-.m-chat-view-hd { padding: 12px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; background: #121826; }
-.m-chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
-.msg-group { display: flex; flex-direction: column; max-width: 80%; }
-.msg-group.me { align-self: flex-end; align-items: flex-end; }
-.msg-group.them { align-self: flex-start; align-items: flex-start; }
-.msg-ts { font-size: 10px; color: #8892a8; margin-bottom: 4px; }
-.msg-bubble { padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.4; color: #ffffff; }
-.msg-group.me .msg-bubble { background: var(--gradient-blue); border-bottom-right-radius: 2px; }
-.msg-group.them .msg-bubble { background: #1a2030; border-bottom-left-radius: 2px; }
-
-/* Bottom Nav Bar */
-.bottom-nav { height: 56px; border-top: 1px solid #1e2638; background: #0c0e12; display: flex; justify-content: space-around; align-items: center; position: sticky; bottom: 0; left: 0; right: 0; z-index: 20; }
-.nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: #8892a8; cursor: pointer; text-decoration: none; }
-.nav-item.active { color: #3b82f6; }
-
-/* Features & Light Theme Section */
-.light-sec { background: #f4f1e8; color: #0f172a; padding: 60px 20px; border-radius: var(--radius-lg); margin: 20px 0; }
-.light-sec h2 { color: #0f172a; font-size: 28px; margin-bottom: 24px; text-align: center; }
-.light-row { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; align-items: center; margin-bottom: 40px; }
-.light-row.rev { direction: rtl; } .light-row.rev > * { direction: ltr; }
-.light-box { background: #e2e8f0; border-radius: var(--radius); aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: #64748b; }
-
-/* Profile View Dynamic Elements */
-.prof-av-large { width: 80px; height: 80px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 700; color: #fff; margin: 0 auto 16px; overflow: hidden; object-fit: cover; border: 2px solid var(--border2); }
-
-/* Grid Systems */
+/* Grid Systems & Utilities */
 .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+/* Profile Page */
+.prof-av-large { width: 72px; height: 72px; border-radius: 50%; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; color: var(--text); margin: 0 auto 16px; overflow: hidden; border: 1px solid var(--border2); }
 
 /* Footer */
 .ft { background: var(--bg); padding: 40px 20px; border-top: 1px solid var(--border); margin-top: auto; }
@@ -203,7 +213,13 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 860px) {
   .hamburger { display: flex; }
   .h-nav { display: none; }
-  .light-row { grid-template-columns: 1fr; }
+  .chat-sidebar { width: 100%; border-right: none; }
+  .chat-workspace { flex-direction: column; }
+  .chat-main { display: none; }
+  .chat-workspace.open-conversation .chat-sidebar { display: none; }
+  .chat-workspace.open-conversation .chat-main { display: flex; }
+  .docs-layout { flex-direction: column; }
+  .docs-sidebar { width: 100%; }
   .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
 }
 </style>
@@ -212,9 +228,9 @@ a { color: inherit; text-decoration: none; }
 
 <!-- Loading Overlay -->
 <div id="loadingOverlay">
-  <div class="loading-logo"><img src="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png" alt="Logo" loading="eager" fetchpriority="high"></div>
+  <div class="loading-logo"><img src="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png" alt="Logo" loading="eager"></div>
   <div class="loading-text">Al Worlds</div>
-  <div class="loading-sub" id="loadStatus">loading ur worlds</div>
+  <div class="loading-sub" id="loadStatus">Initializing workspace</div>
   <div class="loading-track"><div class="loading-track-inner" id="loadProgress"></div></div>
 </div>
 
@@ -228,12 +244,11 @@ a { color: inherit; text-decoration: none; }
   <nav class="h-nav">
     <a onclick="nav('landing')">Home</a>
     <a onclick="nav('chat')">Chat</a>
+    <a onclick="nav('docs')">Docs</a>
     <a onclick="nav('worlds')">Worlds</a>
     <a onclick="nav('forums')">Forums</a>
-    <a onclick="nav('features')">Features</a>
     <a onclick="nav('pricing')">Pricing</a>
     <a onclick="nav('support')">Support</a>
-    <a onclick="nav('downloads')">Download</a>
   </nav>
   <div class="h-actions" id="headerAuth">
     <button class="h-btn ghost" onclick="nav('login')">Sign In</button>
@@ -254,6 +269,7 @@ a { color: inherit; text-decoration: none; }
       <div class="sb-links">
         <a onclick="nav('landing'); toggleSidebar(false)">Home</a>
         <a onclick="nav('chat'); toggleSidebar(false)">Chat</a>
+        <a onclick="nav('docs'); toggleSidebar(false)">Documentation</a>
         <a onclick="nav('worlds'); toggleSidebar(false)">Worlds</a>
         <a onclick="nav('forums'); toggleSidebar(false)">Forums</a>
       </div>
@@ -261,25 +277,15 @@ a { color: inherit; text-decoration: none; }
     <div class="sb-sec">
       <h4>Product</h4>
       <div class="sb-links">
-        <a onclick="nav('features'); toggleSidebar(false)">Features</a>
         <a onclick="nav('pricing'); toggleSidebar(false)">Pricing</a>
         <a onclick="nav('downloads'); toggleSidebar(false)">Downloads</a>
       </div>
     </div>
     <div class="sb-sec">
-      <h4>Company</h4>
-      <div class="sb-links">
-        <a onclick="nav('about'); toggleSidebar(false)">About</a>
-        <a onclick="nav('blog'); toggleSidebar(false)">Blog</a>
-        <a onclick="nav('careers'); toggleSidebar(false)">Careers</a>
-        <a onclick="nav('support'); toggleSidebar(false)">Support</a>
-      </div>
-    </div>
-    <div class="sb-sec">
       <h4>Legal</h4>
       <div class="sb-links">
-        <a onclick="nav('privacy'); toggleSidebar(false)">Privacy</a>
-        <a onclick="nav('terms'); toggleSidebar(false)">Terms</a>
+        <a onclick="nav('privacy'); toggleSidebar(false)">Privacy Policy</a>
+        <a onclick="nav('terms'); toggleSidebar(false)">Terms of Service</a>
       </div>
     </div>
   </div>
@@ -288,427 +294,384 @@ a { color: inherit; text-decoration: none; }
 
 <!-- Views -->
 
-<!-- 1. Landing (Home Screen) -->
+<!-- 1. Landing View -->
 <div class="app-view active" id="viewLanding">
   <section class="hero">
-    <div class="hero-badge"><i data-lucide="sparkles" style="width:14px; height:14px;"></i> Welcome to Al Worlds</div>
-    <h1>We believe Humans and AI are equal</h1>
-    <p>Step into customizable digital realms, converse with distinct AI personas, and craft unforgettable interactive experiences together.</p>
+    <div class="hero-badge"><i data-lucide="shield-check" style="width:14px; height:14px;"></i> Enterprise-Grade AI Platform</div>
+    <h1>Real-time AI Infrastructure & Workspaces</h1>
+    <p>Deploy custom autonomous models, conduct synchronized team operations, and integrate persistent agents into scalable operational environments.</p>
     <div class="hero-actions">
-      <button class="btn primary" onclick="nav('signup')">Get Started <i data-lucide="arrow-right" style="width:16px;"></i></button>
-      <button class="btn secondary" onclick="nav('features')">Learn More</button>
+      <button class="btn primary" onclick="nav('signup')">Get Started <i data-lucide="arrow-right" style="width:14px;"></i></button>
+      <button class="btn secondary" onclick="nav('docs')">Read Documentation</button>
     </div>
   </section>
 
   <div class="container" style="padding-top: 0;">
-    <div class="grid-3" style="margin-top: 20px;">
-      <div class="card" style="text-align: center;">
-        <i data-lucide="message-square" style="width:28px; height:28px; color:#3b82f6; margin-bottom:12px;"></i>
-        <h3>Interactive Chats</h3>
-        <p style="font-size:12px; color:var(--text2); margin-top:6px;">Engage in rich real-time discussions with specialized autonomous characters.</p>
+    <div class="grid-3">
+      <div class="card">
+        <i data-lucide="message-square" style="width:24px; height:24px; color:var(--accent); margin-bottom:12px;"></i>
+        <h3 style="font-size:15px; margin-bottom:6px;">High-Throughput Chat</h3>
+        <p style="font-size:13px; color:var(--text2); line-height:1.5;">Low-latency streaming architecture engineered for seamless multi-agent and human synchronization.</p>
       </div>
-      <div class="card" style="text-align: center;">
-        <i data-lucide="globe" style="width:28px; height:28px; color:#a855f7; margin-bottom:12px;"></i>
-        <h3>Custom Worlds</h3>
-        <p style="font-size:12px; color:var(--text2); margin-top:6px;">Build unique spaces and define distinct personalities tailored to your goals.</p>
+      <div class="card">
+        <i data-lucide="cpu" style="width:24px; height:24px; color:var(--accent); margin-bottom:12px;"></i>
+        <h3 style="font-size:15px; margin-bottom:6px;">Custom World State</h3>
+        <p style="font-size:13px; color:var(--text2); line-height:1.5;">Define explicit context parameters, variable state memory, and behavioral guidelines for specialized tasks.</p>
       </div>
-      <div class="card" style="text-align: center;">
-        <i data-lucide="users" style="width:28px; height:28px; color:#e94db3; margin-bottom:12px;"></i>
-        <h3>Community Forums</h3>
-        <p style="font-size:12px; color:var(--text2); margin-top:6px;">Connect with other creators to share custom personas, worlds, and ideas.</p>
+      <div class="card">
+        <i data-lucide="code" style="width:24px; height:24px; color:var(--accent); margin-bottom:12px;"></i>
+        <h3 style="font-size:15px; margin-bottom:6px;">Extensible API</h3>
+        <p style="font-size:13px; color:var(--text2); line-height:1.5;">Programmatically control instances, stream tokens, and trigger dynamic events through standardized REST & WS channels.</p>
       </div>
     </div>
   </div>
 
   <footer class="ft">
     <div class="ft-in">
-      <div><strong>Al Worlds</strong> &copy; 2026. All rights reserved.</div>
+      <div><strong>Al Worlds Infrastructure</strong> &copy; 2026. All rights reserved.</div>
       <div style="display: flex; gap: 16px;">
-        <a onclick="nav('privacy')">Privacy</a>
-        <a onclick="nav('terms')">Terms</a>
-        <a onclick="nav('support')">Support</a>
+        <a onclick="nav('privacy')" class="grey-link">Privacy Policy</a>
+        <a onclick="nav('terms')" class="grey-link">Terms of Service</a>
+        <a onclick="nav('support')" class="grey-link">Support Desk</a>
       </div>
     </div>
   </footer>
 </div>
 
-<!-- 2. Chat View (Moved here) -->
+<!-- 2. Full-Featured Desktop/Mobile Chat View -->
 <div class="app-view" id="viewChat">
-  <div class="container" style="padding-top: 10px;">
-    <!-- Mobile-First Chat Component -->
-    <div class="m-chat-layout">
-      <!-- Workspace Selector -->
-      <div class="ws-selector">
-        <div class="ws-btn" onclick="toggleWorkspaceDropdown()">
-          <span id="wsUsername">User</span>
-          <i data-lucide="chevron-down" style="width: 16px;"></i>
+  <div class="chat-workspace" id="chatWorkspace">
+    <!-- Chat Sidebar -->
+    <div class="chat-sidebar">
+      <div class="cs-header">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:14px; font-weight:700;">Messages</span>
+          <button class="btn primary" style="padding:4px 10px; font-size:11px;" onclick="newConversation()"><i data-lucide="plus" style="width:12px;"></i> New Chat</button>
         </div>
-        <div class="ws-dropdown" id="wsDropdown">
-          <div class="ws-item" onclick="selectWorkspace('Personal account')">
-            <i data-lucide="user" style="width:14px;"></i> Personal account
-          </div>
-          <div class="ws-item" onclick="createNewWorkspace()">
-            <i data-lucide="plus" style="width:14px;"></i> Create workspace
-          </div>
+        <div class="cs-search">
+          <i data-lucide="search"></i>
+          <input type="text" placeholder="Search conversations...">
         </div>
       </div>
-
-      <!-- Search Bar -->
-      <div class="chat-search-wrap">
-        <input type="text" class="chat-search-input" placeholder="Search...">
+      <div class="cs-filters">
+        <button class="cs-filter-btn active">All</button>
+        <button class="cs-filter-btn">Direct</button>
+        <button class="cs-filter-btn">Agents</button>
+        <button class="cs-filter-btn">Archived</button>
       </div>
-
-      <!-- Filter Tabs Bar -->
-      <div class="filter-bar">
-        <div class="filter-tabs">
-          <button class="filter-pill active" onclick="setFilter(this)">All</button>
-          <button class="filter-pill" onclick="setFilter(this)">Unread</button>
-          <button class="filter-pill" onclick="setFilter(this)">User DMs</button>
-          <button class="filter-pill" onclick="setFilter(this)">Private</button>
-          <button class="filter-pill" onclick="setFilter(this)">Social</button>
-        </div>
-        <span class="mark-read-link" onclick="markAllAsRead()">Mark as read</span>
-      </div>
-
-      <!-- Chat List -->
-      <div class="m-chat-list" id="mobileChatList">
-        <div class="m-chat-row active" onclick="openMobileConversation('AI Companion', 'https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png')">
-          <div class="avatar-wrap">
-            <img src="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png" class="avatar-img" alt="Avatar">
-            <div class="unread-dot"></div>
+      <div class="cs-list" id="conversationList">
+        <div class="cs-item active" onclick="selectWorkspaceChat('System Agent', 'Online')">
+          <div class="cs-avatar">
+            SA
+            <div class="cs-status"></div>
           </div>
-          <div class="m-chat-info">
-            <div class="m-chat-top">
-              <span class="m-chat-title">AI Companion</span>
-              <span class="m-chat-time">10:42 AM</span>
+          <div class="cs-info">
+            <div class="cs-top">
+              <span class="cs-name">System Agent</span>
+              <span class="cs-time">12:04 PM</span>
             </div>
-            <div class="m-chat-preview">Ready to continue crafting ur world?</div>
+            <div class="cs-preview">Workspace initialization complete. Ready for queries.</div>
           </div>
         </div>
       </div>
+    </div>
 
-      <!-- Special Button -->
-      <div style="padding: 0 12px;">
-        <button class="new-shape-btn" onclick="newConversation()">
-          <i data-lucide="shapes" style="width: 16px;"></i> New Shape
-        </button>
-      </div>
-
-      <!-- Active Conversation Interface Overlay -->
-      <div class="m-chat-view" id="mobileChatView">
-        <div class="m-chat-view-hd">
-          <button onclick="closeMobileConversation()"><i data-lucide="arrow-left" style="width: 18px;"></i></button>
-          <div style="font-weight: bold;" id="mActiveChatTitle">Chat</div>
-        </div>
-        <div class="m-chat-msgs" id="mChatMessages">
-          <div class="msg-group them">
-            <span class="msg-ts">10:40 AM</span>
-            <div class="msg-bubble">Welcome back to ur worlds</div>
-          </div>
-          <div class="msg-group me">
-            <span class="msg-ts">10:42 AM</span>
-            <div class="msg-bubble">Glad to be here!</div>
+    <!-- Main Chat Window -->
+    <div class="chat-main">
+      <div class="cm-header">
+        <div class="cm-title-wrap">
+          <button class="cm-icon-btn" style="display:none;" id="backToChatList" onclick="closeWorkspaceChat()"><i data-lucide="arrow-left" style="width:16px;"></i></button>
+          <div>
+            <div class="cm-title" id="activeChatTitle">System Agent</div>
+            <div class="cm-status-text" id="activeChatStatus">Active Session</div>
           </div>
         </div>
-        <div style="padding: 12px; background: #121826; border-top: 1px solid var(--border); display: flex; gap: 8px;">
-          <input type="text" id="mChatInput" placeholder="Type a message..." style="flex:1; background: var(--bg); padding: 8px 12px; border-radius: 999px; border: 1px solid var(--border); font-size:13px;" onkeypress="if(event.key==='Enter') sendMobileMessage()">
-          <button class="btn primary" style="padding: 8px 16px;" onclick="sendMobileMessage()"><i data-lucide="send" style="width: 14px;"></i></button>
+        <div class="cm-actions">
+          <button class="cm-icon-btn" title="Search Message"><i data-lucide="search" style="width:16px;"></i></button>
+          <button class="cm-icon-btn" title="Export Context"><i data-lucide="download" style="width:16px;"></i></button>
+          <button class="cm-icon-btn" title="Settings"><i data-lucide="settings" style="width:16px;"></i></button>
         </div>
       </div>
 
-      <!-- Bottom Navigation Bar -->
-      <div class="bottom-nav">
-        <div class="nav-item" onclick="nav('landing')">
-          <i data-lucide="home" style="width: 20px; height: 20px;"></i>
+      <div class="cm-messages" id="chatMessagesArea">
+        <div class="chat-bubble-group them">
+          <div class="chat-bubble-meta"><span>System Agent</span><span>12:00 PM</span></div>
+          <div class="chat-bubble">Welcome to the Al Worlds workspace interface. You can execute commands, initiate autonomous routines, or communicate directly with connected models.</div>
         </div>
-        <div class="nav-item active" onclick="nav('chat')">
-          <i data-lucide="message-square" style="width: 20px; height: 20px;"></i>
-        </div>
-        <div class="nav-item" onclick="newConversation()">
-          <i data-lucide="plus-circle" style="width: 20px; height: 20px;"></i>
-        </div>
-        <div class="nav-item" onclick="nav('profile')">
-          <i data-lucide="settings" style="width: 20px; height: 20px;"></i>
+      </div>
+
+      <div class="cm-input-area">
+        <div class="cm-input-box">
+          <textarea id="chatInput" placeholder="Type a message or press '/' for commands..." rows="1" onkeypress="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendChatMessage(); }"></textarea>
+          <div class="cm-input-actions">
+            <button class="cm-icon-btn"><i data-lucide="paperclip" style="width:16px;"></i></button>
+            <button class="btn primary" style="padding:6px 12px;" onclick="sendChatMessage()"><i data-lucide="send" style="width:14px;"></i></button>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 3. Login -->
+<!-- 3. Real Documentation Engine -->
+<div class="app-view" id="viewDocs">
+  <div class="container">
+    <div style="margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px;">
+      <h1 style="font-size: 28px; font-weight: 800; letter-spacing: -0.5px;">Platform Documentation</h1>
+      <p style="font-size: 14px; color: var(--text2); margin-top: 4px;">Technical references, API definitions, and deployment guidelines.</p>
+    </div>
+
+    <div class="docs-layout">
+      <div class="docs-sidebar">
+        <div class="docs-menu">
+          <div class="docs-menu-item active" onclick="scrollToDoc('doc-overview')">Overview</div>
+          <div class="docs-menu-item" onclick="scrollToDoc('doc-authentication')">Authentication</div>
+          <div class="docs-menu-item" onclick="scrollToDoc('doc-chat-api')">Chat Stream API</div>
+          <div class="docs-menu-item" onclick="scrollToDoc('doc-worlds')">World Configurations</div>
+          <div class="docs-menu-item" onclick="scrollToDoc('doc-webhooks')">Webhooks & Events</div>
+        </div>
+      </div>
+
+      <div class="docs-content">
+        <div class="docs-section" id="doc-overview">
+          <h2>Overview</h2>
+          <p>Al Worlds provides structured communication pipelines for hosting persistent, autonomous computational instances. All actions are validated over TLS 1.3 protocol layers and routed through edge instances.</p>
+          <p>The platform exposes standardized interfaces for client-side chat widgets, backend server integration, and automated event triggers.</p>
+        </div>
+
+        <div class="docs-section" id="doc-authentication">
+          <h2>Authentication</h2>
+          <p>API requests require bearer token authorization header headers matching your client application keys.</p>
+          <div class="code-block">
+Authorization: Bearer al_live_9948201948201948102
+Content-Type: application/json
+          </div>
+          <p>Never expose production write-keys in client-side code repositories. Utilize scoped public key sets for frontend messaging widgets.</p>
+        </div>
+
+        <div class="docs-section" id="doc-chat-api">
+          <h2>Chat Stream API</h2>
+          <p>Initiate real-time stream endpoints via HTTP POST to dispatch payloads to connected targets.</p>
+          <h3>Endpoint Definition</h3>
+          <div class="code-block">POST https://tawanametatronnzombe-star.github.io/Al-Worlds/v1/chat/completions</div>
+          <h3>Payload Structure</h3>
+          <div class="code-block">
+{
+  "model": "al-world-core-v2",
+  "messages": [
+    {"role": "system", "content": "You are a systems monitor."},
+    {"role": "user", "content": "Fetch cluster health status."}
+  ],
+  "stream": true
+}
+          </div>
+        </div>
+
+        <div class="docs-section" id="doc-worlds">
+          <h2>World Configurations</h2>
+          <p>Worlds act as explicit environment isolation containers. Each world instance encapsulates context memory, system definitions, user access permissions, and model configurations.</p>
+        </div>
+
+        <div class="docs-section" id="doc-webhooks">
+          <h2>Webhooks & Events</h2>
+          <p>Subscribe to incoming events including state changes, message deliveries, and session timeouts using HTTP POST webhook callback listeners.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. Login View -->
 <div class="app-view" id="viewLogin">
   <div class="auth-page">
     <div class="auth-card">
-      <h2 style="font-size: 18px; margin-bottom: 6px;">log in to talk to ai with friends.</h2>
-      <p style="font-size: 12px; color: var(--text2); margin-bottom: 20px;">Welcome back to your worlds</p>
+      <div class="a-header">
+        <h2>Account Login</h2>
+        <p>Access your workspace and agent configurations</p>
+      </div>
       <div class="a-err" id="loginErr"></div>
       <div class="a-field">
-        <label>Email</label>
-        <input type="email" id="loginEmail" placeholder="you@example.com">
+        <label>Email Address</label>
+        <input type="email" id="loginEmail" placeholder="name@company.com">
       </div>
       <div class="a-field">
         <label>Password</label>
         <input type="password" id="loginPassword" placeholder="••••••••">
       </div>
-      <button class="btn primary a-btn" onclick="handleLogin()">Log In</button>
-      <button class="btn secondary a-btn" style="margin-top: 8px;" onclick="handleOAuth('google')"><i data-lucide="chrome"></i> Continue with Google</button>
-      <div style="font-size: 11px; color: var(--text3); margin-top: 16px; display: flex; justify-space-between;">
-        <a onclick="nav('signup')">Sign Up</a>
-        <a onclick="nav('forgot')">Forgot Password?</a>
+      <button class="btn primary a-btn" onclick="handleLogin()">Sign In</button>
+      <button class="btn secondary a-btn" style="margin-top: 8px;" onclick="handleOAuth('google')">Continue with Google</button>
+      <div class="auth-footer">
+        <a onclick="nav('signup')" class="grey-link">Create Account</a>
+        <a onclick="nav('forgot')" class="grey-link">Reset Password</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 4. Signup -->
+<!-- 5. Signup View -->
 <div class="app-view" id="viewSignup">
   <div class="auth-page">
     <div class="auth-card">
-      <h2 style="font-size: 18px; margin-bottom: 6px;">Create your account</h2>
-      <p style="font-size: 12px; color: var(--text2); margin-bottom: 20px;">Start building custom AI characters</p>
+      <div class="a-header">
+        <h2>Create Account</h2>
+        <p>Initialize your workspace infrastructure</p>
+      </div>
       <div class="a-err" id="signupErr"></div>
       <div class="a-field">
         <label>Full Name</label>
         <input type="text" id="signupName" placeholder="Alex Rivers">
       </div>
       <div class="a-field">
-        <label>Email</label>
-        <input type="email" id="signupEmail" placeholder="you@example.com">
+        <label>Email Address</label>
+        <input type="email" id="signupEmail" placeholder="name@company.com">
       </div>
       <div class="a-field">
         <label>Password</label>
         <input type="password" id="signupPassword" placeholder="••••••••">
       </div>
-      <button class="btn primary a-btn" onclick="handleSignup()">Create Account</button>
-      <button class="btn secondary a-btn" style="margin-top: 8px;" onclick="handleOAuth('google')"><i data-lucide="chrome"></i> Continue with Google</button>
-      <div style="font-size: 11px; color: var(--text3); margin-top: 16px;">
-        Already have an account? <a onclick="nav('login')">Log In</a>
+      <button class="btn primary a-btn" onclick="handleSignup()">Register Workspace</button>
+      <button class="btn secondary a-btn" style="margin-top: 8px;" onclick="handleOAuth('google')">Register with Google</button>
+      <div class="auth-footer">
+        <span>Already registered?</span>
+        <a onclick="nav('login')" class="grey-link">Sign In</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 5. Forgot Password -->
+<!-- 6. Forgot Password View -->
 <div class="app-view" id="viewForgot">
   <div class="auth-page">
     <div class="auth-card">
-      <h2 style="font-size: 18px; margin-bottom: 6px;">Reset Password</h2>
-      <p style="font-size: 12px; color: var(--text2); margin-bottom: 20px;">We'll send a link to your email</p>
+      <div class="a-header">
+        <h2>Password Recovery</h2>
+        <p>Enter your email to receive recovery instructions</p>
+      </div>
       <div class="a-err" id="forgotErr"></div>
       <div class="a-field">
-        <label>Email</label>
-        <input type="email" id="forgotEmail" placeholder="you@example.com">
+        <label>Email Address</label>
+        <input type="email" id="forgotEmail" placeholder="name@company.com">
       </div>
-      <button class="btn primary a-btn" onclick="handleForgot()">Send Reset Link</button>
-      <div style="font-size: 11px; color: var(--text3); margin-top: 16px;">
-        Remembered? <a onclick="nav('login')">Log In</a>
+      <button class="btn primary a-btn" onclick="handleForgot()">Send Recovery Link</button>
+      <div class="auth-footer">
+        <span>Remembered details?</span>
+        <a onclick="nav('login')" class="grey-link">Sign In</a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 6. Profile & Edit View -->
+<!-- 7. Profile View -->
 <div class="app-view" id="viewProfile">
-  <div class="container" style="max-width: 500px;">
+  <div class="container" style="max-width: 540px;">
     <div class="card" style="text-align: center;">
       <div id="profileAvatarContainer">
-        <div id="profileAvatar" class="prof-av-large">?</div>
+        <div class="prof-av-large" id="profileAvatar">U</div>
       </div>
-      <h2 id="profileName" style="font-size: 20px;">Loading...</h2>
-      <p id="profileHandle" style="font-size: 12px; color: var(--text2); margin-bottom: 20px;">@user</p>
-      
-      <div style="display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 12px 0;">
-        <div><div id="profMsgs" style="font-size: 18px; font-weight: 700;">0</div><div style="font-size: 10px; color: var(--text3);">Messages</div></div>
-        <div><div id="profWorlds" style="font-size: 18px; font-weight: 700;">0</div><div style="font-size: 10px; color: var(--text3);">Worlds</div></div>
-      </div>
+      <h2 id="profileName" style="font-size: 20px; font-weight: 700;">Loading User</h2>
+      <p id="profileHandle" style="font-size: 13px; color: var(--text2); margin-bottom: 20px;">@user</p>
 
-      <!-- Profile Edit Controls -->
-      <div class="card" style="text-align: left; background: var(--bg3); margin-bottom: 20px;">
-        <h3 style="font-size: 14px; margin-bottom: 14px;">Edit Profile</h3>
+      <div class="card" style="text-align: left; background: var(--bg); margin-bottom: 20px;">
+        <h3 style="font-size: 14px; margin-bottom: 14px;">Profile Settings</h3>
         <div class="a-field">
           <label>Display Name</label>
-          <input type="text" id="editDisplayName" placeholder="Your Name">
+          <input type="text" id="editDisplayName">
         </div>
         <div class="a-field">
           <label>Username</label>
-          <input type="text" id="editUsername" placeholder="username">
+          <input type="text" id="editUsername">
         </div>
         <div class="a-field">
-          <label>Profile Picture URL</label>
-          <input type="url" id="editAvatarUrl" placeholder="https://example.com/avatar.jpg">
+          <label>Avatar URL</label>
+          <input type="url" id="editAvatarUrl">
         </div>
-        <div class="a-field">
-          <label>Upload Picture File</label>
-          <input type="file" id="editAvatarFile" accept="image/*" style="padding: 4px;">
-        </div>
-        <button class="btn primary" style="width: 100%; margin-top: 6px;" onclick="saveProfile()">Save Changes</button>
+        <button class="btn primary" style="width: 100%; margin-top: 6px;" onclick="saveProfile()">Save Settings</button>
       </div>
 
       <div style="display: flex; gap: 10px; justify-content: center;">
-        <button class="btn primary" onclick="nav('chat')">Open Chat</button>
         <button class="btn secondary" onclick="handleLogout()">Sign Out</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 7. Worlds -->
+<!-- 8. Worlds Management View -->
 <div class="app-view" id="viewWorlds">
   <div class="container">
-    <h2 style="font-size: 22px; margin-bottom: 6px;">Your AI Worlds</h2>
-    <p style="font-size: 12px; color: var(--text2); margin-bottom: 24px;">Build and manage distinct autonomous characters.</p>
+    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 6px;">World Configurations</h2>
+    <p style="font-size: 13px; color: var(--text2); margin-bottom: 24px;">Manage dynamic execution environments and agent profiles.</p>
     <div class="card" style="margin-bottom: 24px;">
-      <h3 style="font-size: 14px; margin-bottom: 12px;">Create New World</h3>
+      <h3 style="font-size: 14px; margin-bottom: 14px;">Create Environment Instance</h3>
       <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-        <input type="text" id="worldName" placeholder="World/Character Name" style="flex: 2; min-width: 150px; background: var(--bg); padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
-        <input type="text" id="worldRole" placeholder="Role (e.g. Mentor)" style="flex: 1; min-width: 120px; background: var(--bg); padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
-        <select id="worldColor" style="background: var(--bg); padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
-          <option value="#e94db3">Hot Pink</option>
-          <option value="#a855f7">Purple</option>
-          <option value="#3b82f6">Blue</option>
-          <option value="#10b981">Emerald</option>
-        </select>
-        <button class="btn primary" onclick="createWorld()">Create</button>
+        <input type="text" id="worldName" placeholder="Instance Title" style="flex: 2; min-width: 160px; background: var(--bg); padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+        <input type="text" id="worldRole" placeholder="Role Designation" style="flex: 1; min-width: 140px; background: var(--bg); padding: 8px 12px; border: 1px solid var(--border); border-radius: var(--radius-sm);">
+        <button class="btn primary" onclick="createWorld()">Initialize Instance</button>
       </div>
     </div>
-    <div class="grid-3" id="worldsGrid">
-      <!-- Dynamic Worlds -->
-    </div>
+    <div class="grid-3" id="worldsGrid"></div>
   </div>
 </div>
 
-<!-- 8. Forums -->
+<!-- 9. Forums View -->
 <div class="app-view" id="viewForums">
   <div class="container">
-    <h2 style="font-size: 22px; margin-bottom: 6px;">Community Forums</h2>
-    <p style="font-size: 12px; color: var(--text2); margin-bottom: 24px;">Discuss character creation, prompt logic, and world design.</p>
-    <div class="grid-2" id="forumsGrid">
-      <!-- Dynamic Forums -->
-    </div>
+    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 6px;">Technical Forums</h2>
+    <p style="font-size: 13px; color: var(--text2); margin-bottom: 24px;">Developer discussions, prompt optimization, and system design patterns.</p>
+    <div class="grid-2" id="forumsGrid"></div>
   </div>
 </div>
 
-<!-- 9. Downloads -->
-<div class="app-view" id="viewDownloads">
-  <div class="container">
-    <h2 style="font-size: 22px; margin-bottom: 24px; text-align: center;">Get Al Worlds</h2>
-    <div class="grid-4">
-      <div class="card" style="text-align: center;"><i data-lucide="smartphone" style="width:32px; height:32px; margin-bottom:12px;"></i><h3>iOS</h3><p style="font-size:11px; color:var(--text2); margin: 8px 0;">Requires iOS 15+</p><button class="btn secondary" style="width:100%;">Download</button></div>
-      <div class="card" style="text-align: center;"><i data-lucide="bot" style="width:32px; height:32px; margin-bottom:12px;"></i><h3>Android</h3><p style="font-size:11px; color:var(--text2); margin: 8px 0;">Requires v8.0+</p><button class="btn secondary" style="width:100%;">Download</button></div>
-      <div class="card" style="text-align: center;"><i data-lucide="globe" style="width:32px; height:32px; margin-bottom:12px;"></i><h3>Web</h3><p style="font-size:11px; color:var(--text2); margin: 8px 0;">Instant Access</p><button class="btn primary" style="width:100%;">Launch</button></div>
-      <div class="card" style="text-align: center;"><i data-lucide="monitor" style="width:32px; height:32px; margin-bottom:12px;"></i><h3>Desktop</h3><p style="font-size:11px; color:var(--text2); margin: 8px 0;">macOS / Windows</p><button class="btn secondary" style="width:100%;">Download</button></div>
-    </div>
-  </div>
-</div>
-
-<!-- 10. Features -->
-<div class="app-view" id="viewFeatures">
-  <div class="container">
-    <div class="light-sec">
-      <h2>Platform Features</h2>
-      <div class="light-row">
-        <div><h3>Real-Time Neural Sync</h3><p style="font-size:13px; margin-top:6px;">Instant response generation with low-latency streaming pipeline.</p></div>
-        <div class="light-box"><i data-lucide="zap" style="width:36px; height:36px;"></i></div>
-      </div>
-      <div class="light-row rev">
-        <div><h3>Memory & Persona Persistence</h3><p style="font-size:13px; margin-top:6px;">Characters retain dynamic state across long-form interactions.</p></div>
-        <div class="light-box"><i data-lucide="database" style="width:36px; height:36px;"></i></div>
-      </div>
-      <div class="light-row">
-        <div><h3>Group Realtime Networks</h3><p style="font-size:13px; margin-top:6px;">Multiple users and multiple AI agents in one unified chat grid.</p></div>
-        <div class="light-box"><i data-lucide="share-2" style="width:36px; height:36px;"></i></div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 11. Pricing -->
+<!-- 10. Pricing View -->
 <div class="app-view" id="viewPricing">
   <div class="container">
-    <h2 style="font-size: 22px; text-align: center; margin-bottom: 24px;">Simple Pricing</h2>
+    <h2 style="font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 24px;">Infrastructure Plans</h2>
     <div class="grid-3">
       <div class="card">
-        <h3>Free</h3>
+        <h3>Standard</h3>
         <div style="font-size: 28px; font-weight: 700; margin: 12px 0;">$0</div>
-        <p style="font-size: 12px; color: var(--text2); margin-bottom: 16px;">Standard speed, 2 custom worlds.</p>
-        <button class="btn secondary" style="width: 100%;" onclick="nav('signup')">Select Free</button>
+        <p style="font-size: 13px; color: var(--text2); margin-bottom: 16px;">Standard throughput, 2 persistent world instances.</p>
+        <button class="btn secondary" style="width: 100%;" onclick="nav('signup')">Select Tier</button>
       </div>
-      <div class="card" style="border-color: var(--accent); position: relative;">
-        <span style="position: absolute; top:-10px; right:16px; background: var(--gradient); padding: 2px 8px; border-radius: 999px; font-size: 9px; font-weight: 700;">FEATURED</span>
-        <h3>Pro</h3>
-        <div style="font-size: 28px; font-weight: 700; margin: 12px 0;">$12 <span style="font-size: 12px;">/mo</span></div>
-        <p style="font-size: 12px; color: var(--text2); margin-bottom: 16px;">Unlimited worlds, priority routing.</p>
-        <button class="btn primary" style="width: 100%;" onclick="nav('signup')">Upgrade to Pro</button>
+      <div class="card" style="border-color: var(--accent);">
+        <h3>Professional</h3>
+        <div style="font-size: 28px; font-weight: 700; margin: 12px 0;">$29 <span style="font-size: 12px; font-weight:400;">/mo</span></div>
+        <p style="font-size: 13px; color: var(--text2); margin-bottom: 16px;">Priority GPU routing, unlimited environment instances.</p>
+        <button class="btn primary" style="width: 100%;" onclick="nav('signup')">Upgrade Tier</button>
       </div>
       <div class="card">
-        <h3>Team</h3>
-        <div style="font-size: 28px; font-weight: 700; margin: 12px 0;">$28 <span style="font-size: 12px;">/mo</span></div>
-        <p style="font-size: 12px; color: var(--text2); margin-bottom: 16px;">Shared workspace, API key export.</p>
-        <button class="btn secondary" style="width: 100%;" onclick="nav('signup')">Contact Team</button>
+        <h3>Enterprise</h3>
+        <div style="font-size: 28px; font-weight: 700; margin: 12px 0;">Custom</div>
+        <p style="font-size: 13px; color: var(--text2); margin-bottom: 16px;">Dedicated single-tenant instances, strict SLA uptime guarantees.</p>
+        <button class="btn secondary" style="width: 100%;" onclick="nav('support')">Contact Sales</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- 12. Support -->
+<!-- 11. Support View -->
 <div class="app-view" id="viewSupport">
   <div class="container" style="max-width: 600px;">
-    <h2 style="font-size: 22px; margin-bottom: 16px;">Help & Support</h2>
+    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 16px;">Support Center</h2>
     <div style="display: flex; flex-direction: column; gap: 12px;">
-      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><strong>Community Discord</strong><p style="font-size:11px; color:var(--text2);">Get help from live active creators.</p></div><i data-lucide="chevron-right"></i></div>
-      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><strong>Knowledge Base</strong><p style="font-size:11px; color:var(--text2);">Search common issues and walkthroughs.</p></div><i data-lucide="chevron-right"></i></div>
-      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><strong>Email Desk</strong><p style="font-size:11px; color:var(--text2);">Submit a support ticket directly to staff.</p></div><i data-lucide="chevron-right"></i></div>
+      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><strong>Technical Documentation</strong><p style="font-size:12px; color:var(--text2);">API parameters and SDK deployment setup.</p></div><button class="btn secondary" onclick="nav('docs')">View Docs</button></div>
+      <div class="card" style="display:flex; justify-content:space-between; align-items:center;"><div><strong>Help Desk Ticket</strong><p style="font-size:12px; color:var(--text2);">Direct communication channel to infrastructure engineering.</p></div><button class="btn secondary">Open Ticket</button></div>
     </div>
   </div>
 </div>
 
-<!-- 13. About -->
-<div class="app-view" id="viewAbout">
-  <div class="container" style="max-width: 600px;">
-    <h2 style="font-size: 22px; margin-bottom: 12px;">About Al Worlds</h2>
-    <p style="font-size: 14px; color: var(--text2); line-height: 1.6;">Al Worlds is built on the foundation that digital human-AI interaction should be real-time, customizable, and inherently social. We bridge autonomous intelligence and human expression into single digital spaces.</p>
-  </div>
-</div>
-
-<!-- 14. Blog -->
-<div class="app-view" id="viewBlog">
-  <div class="container" style="max-width: 600px;">
-    <div class="card">
-      <span style="font-size: 10px; color: #3b82f6;">ANNOUNCEMENT</span>
-      <h2 style="font-size: 20px; margin: 6px 0;">Introducing Al Worlds 2.0 Realtime Architecture</h2>
-      <p style="font-size: 12px; color: var(--text3); margin-bottom: 12px;">September 2026 • By Tech Team</p>
-      <p style="font-size: 13px; color: var(--text2); line-height: 1.6;">We have overhauled our WebSocket pipeline to deliver sub-100ms state updates to global edge instances. Dive into what makes our dynamic personas faster than ever.</p>
-    </div>
-  </div>
-</div>
-
-<!-- 15. Careers -->
-<div class="app-view" id="viewCareers">
-  <div class="container" style="max-width: 600px;">
-    <h2 style="font-size: 22px; margin-bottom: 16px;">Open Positions</h2>
-    <div class="card" style="display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <h3>Distributed Systems Engineer</h3>
-        <p style="font-size: 11px; color: var(--text2);">Remote • Full-time</p>
-      </div>
-      <button class="btn secondary">Apply</button>
-    </div>
-  </div>
-</div>
-
-<!-- 16. Privacy -->
+<!-- 12. Privacy View -->
 <div class="app-view" id="viewPrivacy">
   <div class="container" style="max-width: 600px;">
-    <h2 style="font-size: 22px; margin-bottom: 12px;">Privacy Policy</h2>
-    <p style="font-size: 13px; color: var(--text2); line-height: 1.6;">Your privacy is essential. All chat payloads are handled securely over encrypted transports. We do not sell personal identification credentials or plain-text private context logs to third-party advertising services.</p>
+    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Privacy Policy</h2>
+    <p style="font-size: 14px; color: var(--text2); line-height: 1.6;">All context payloads and conversation histories sent through the Al Worlds platform are protected with TLS 1.3 protocol encryption. System state data is isolated strictly per tenant workspace and is not repurposed for public model training processes.</p>
   </div>
 </div>
 
-<!-- 17. Terms -->
+<!-- 13. Terms View -->
 <div class="app-view" id="viewTerms">
   <div class="container" style="max-width: 600px;">
-    <h2 style="font-size: 22px; margin-bottom: 12px;">Terms of Service</h2>
-    <p style="font-size: 13px; color: var(--text2); line-height: 1.6;">By accessing Al Worlds, you agree to adhere to safe deployment protocols. Automated abusive generation, API flooding, and intentional breach of access controls are strictly prohibited.</p>
+    <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 12px;">Terms of Service</h2>
+    <p style="font-size: 14px; color: var(--text2); line-height: 1.6;">By accessing the Al Worlds platform API, UI dashboards, and streaming endpoints, users agree to strictly enforce authenticated access procedures. System abuse, deliberate API rate limit circumvention, or unauthorized key distribution will result in immediate termination of execution privileges.</p>
   </div>
 </div>
 
@@ -718,7 +681,7 @@ const SUPABASE_URL = 'https://sudzcapryzorzvqcxxsn.supabase.co';
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN1ZHpjYXByeXpvcnp2cWN4eHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDAzNTcsImV4cCI6MjEwNDE3NjM1N30.bhg89VcmrRaP0KKvqMqo2wFZQboCOQjoxtlJd8Tth80';
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-// State Management
+// Application State
 let currentUser = null;
 let userProfileData = null;
 let currentConvId = null;
@@ -733,7 +696,6 @@ function nav(pageName) {
     window.scrollTo(0,0);
   }
   
-  // Refresh views data
   if (pageName === 'profile') loadProfileData();
   if (pageName === 'worlds') loadWorldsData();
   if (pageName === 'forums') loadForumsData();
@@ -747,13 +709,13 @@ function toggleSidebar(open) {
 
 document.getElementById('hamburgerBtn').addEventListener('click', () => toggleSidebar(true));
 
-// Loading Screen Milestone Tracker
-let milestones = 0;
-function updateProgress(step, text) {
-  milestones = Math.min(milestones + step, 100);
-  document.getElementById('loadProgress').style.width = milestones + '%';
-  document.getElementById('loadStatus').innerText = text;
-  if (milestones >= 100) {
+// Progress Tracker
+let progressVal = 0;
+function setProgress(val, status) {
+  progressVal = Math.min(val, 100);
+  document.getElementById('loadProgress').style.width = progressVal + '%';
+  document.getElementById('loadStatus').innerText = status;
+  if (progressVal >= 100) {
     setTimeout(() => {
       document.getElementById('loadingOverlay').classList.add('hidden');
     }, 200);
@@ -762,64 +724,34 @@ function updateProgress(step, text) {
 
 // Initial Boot Logic
 window.addEventListener('DOMContentLoaded', async () => {
-  updateProgress(20, "loading ur worlds");
-  if (window.lucide) { lucide.createIcons(); updateProgress(20, "loading ur worlds"); }
+  setProgress(20, "Loading components");
+  if (window.lucide) { lucide.createIcons(); setProgress(40, "Initializing system icons"); }
   
-  // Check Supabase session
   const { data: { session } } = await supabaseClient.auth.getSession();
-  updateProgress(30, "loading ur worlds");
+  setProgress(70, "Verifying session state");
   await handleUserSession(session?.user || null);
 
   supabaseClient.auth.onAuthStateChange(async (_event, session) => {
     await handleUserSession(session?.user || null);
   });
 
-  updateProgress(30, "loading ur worlds");
-  
-  // Safety timeout
-  setTimeout(() => {
-    document.getElementById('loadingOverlay').classList.add('hidden');
-  }, 800);
+  setProgress(100, "Ready");
 });
-
-// Workspace UI actions
-function toggleWorkspaceDropdown() {
-  document.getElementById('wsDropdown').classList.toggle('show');
-}
-function selectWorkspace(name) {
-  document.getElementById('wsUsername').innerText = name;
-  document.getElementById('wsDropdown').classList.remove('show');
-}
-function createNewWorkspace() {
-  const ws = prompt("Enter new workspace name:");
-  if (ws) selectWorkspace(ws);
-}
-function setFilter(el) {
-  document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
-  el.classList.add('active');
-}
-function markAllAsRead() {
-  document.querySelectorAll('.unread-dot').forEach(d => d.remove());
-}
 
 // Auth Handlers
 async function handleUserSession(user) {
   currentUser = user;
   const headerAuth = document.getElementById('headerAuth');
-  const wsUser = document.getElementById('wsUsername');
   if (user) {
     const { data: profile } = await supabaseClient.from('profiles').select('*').eq('id', user.id).maybeSingle();
     userProfileData = profile;
 
-    const googlePic = user.user_metadata?.avatar_url || user.user_metadata?.picture;
     const displayName = profile?.display_name || user.user_metadata?.full_name || user.email.split('@')[0];
-    const avatarUrl = profile?.avatar_url || googlePic;
-    
-    if (wsUser) wsUser.innerText = displayName;
+    const avatarUrl = profile?.avatar_url || user.user_metadata?.avatar_url;
 
     let avatarHtml = `<div class="ub-av">${displayName.charAt(0).toUpperCase()}</div>`;
     if (avatarUrl) {
-      avatarHtml = `<img src="${avatarUrl}" class="ub-av" style="object-fit:cover;">`;
+      avatarHtml = `<img src="${avatarUrl}" class="ub-av">`;
     }
 
     headerAuth.innerHTML = `
@@ -830,7 +762,6 @@ async function handleUserSession(user) {
     `;
   } else {
     userProfileData = null;
-    if (wsUser) wsUser.innerText = "User";
     headerAuth.innerHTML = `
       <button class="h-btn ghost" onclick="nav('login')">Sign In</button>
       <button class="h-btn primary" onclick="nav('signup')">Get Started</button>
@@ -869,9 +800,7 @@ async function handleSignup() {
       await supabaseClient.from('profiles').upsert({
         id: data.user.id,
         display_name: name,
-        username: email.split('@')[0],
-        message_count: 0,
-        world_count: 0
+        username: email.split('@')[0]
       });
     }
     nav('landing');
@@ -889,7 +818,7 @@ async function handleForgot() {
     err.innerText = error.message;
     err.style.display = 'block';
   } else {
-    alert("Reset link dispatched to your email address.");
+    alert("Recovery instructions dispatched to registered email.");
     nav('login');
   }
 }
@@ -908,25 +837,19 @@ async function handleLogout() {
   nav('landing');
 }
 
-// Profile Loader & Profile Editor Pipeline
+// Profile Loader
 async function loadProfileData() {
   if (!currentUser) { nav('login'); return; }
 
   const { data } = await supabaseClient.from('profiles').select('*').eq('id', currentUser.id).maybeSingle();
   userProfileData = data;
 
-  const googlePic = currentUser.user_metadata?.avatar_url || currentUser.user_metadata?.picture;
-  const googleName = currentUser.user_metadata?.full_name;
-
-  const displayName = data?.display_name || googleName || currentUser.email.split('@')[0];
+  const displayName = data?.display_name || currentUser.user_metadata?.full_name || currentUser.email.split('@')[0];
   const username = data?.username || currentUser.email.split('@')[0];
-  const avatarUrl = data?.avatar_url || googlePic;
+  const avatarUrl = data?.avatar_url || currentUser.user_metadata?.avatar_url;
 
   document.getElementById('profileName').innerText = displayName;
   document.getElementById('profileHandle').innerText = '@' + username;
-  document.getElementById('profMsgs').innerText = data?.message_count || 0;
-  document.getElementById('profWorlds').innerText = data?.world_count || 0;
-
   document.getElementById('editDisplayName').value = displayName;
   document.getElementById('editUsername').value = username;
   document.getElementById('editAvatarUrl').value = avatarUrl || '';
@@ -935,32 +858,15 @@ async function loadProfileData() {
   if (avatarUrl) {
     avatarContainer.innerHTML = `<img src="${avatarUrl}" class="prof-av-large" alt="Avatar">`;
   } else {
-    avatarContainer.innerHTML = `<div id="profileAvatar" class="prof-av-large">${displayName.charAt(0).toUpperCase()}</div>`;
+    avatarContainer.innerHTML = `<div class="prof-av-large">${displayName.charAt(0).toUpperCase()}</div>`;
   }
 }
 
 async function saveProfile() {
   if (!currentUser) return;
-
   const displayName = document.getElementById('editDisplayName').value.trim();
   const username = document.getElementById('editUsername').value.trim();
-  let avatarUrl = document.getElementById('editAvatarUrl').value.trim();
-  const fileInput = document.getElementById('editAvatarFile');
-
-  if (fileInput.files && fileInput.files[0]) {
-    const file = fileInput.files[0];
-    const fileExt = file.name.split('.').pop();
-    const filePath = `${currentUser.id}/${Math.random()}.${fileExt}`;
-
-    const { error: uploadErr } = await supabaseClient.storage
-      .from('avatars')
-      .upload(filePath, file, { upsert: true });
-
-    if (!uploadErr) {
-      const { data: pubUrlData } = supabaseClient.storage.from('avatars').getPublicUrl(filePath);
-      if (pubUrlData) avatarUrl = pubUrlData.publicUrl;
-    }
-  }
+  const avatarUrl = document.getElementById('editAvatarUrl').value.trim();
 
   const { error } = await supabaseClient.from('profiles').upsert({
     id: currentUser.id,
@@ -971,32 +877,32 @@ async function saveProfile() {
   });
 
   if (!error) {
-    alert("Profile saved successfully!");
+    alert("Profile settings updated.");
     await handleUserSession(currentUser);
     loadProfileData();
   } else {
-    alert("Failed to save profile: " + error.message);
+    alert("Failed to save settings: " + error.message);
   }
 }
 
-// Worlds Loader & Actions
+// Worlds Loader
 async function loadWorldsData() {
   if (!currentUser) return;
   const { data } = await supabaseClient.from('worlds').select('*').eq('user_id', currentUser.id).order('created_at', { ascending: false });
   const grid = document.getElementById('worldsGrid');
   if (!data || data.length === 0) {
-    grid.innerHTML = '<div style="color: var(--text3); font-size:12px;">No worlds created yet.</div>';
+    grid.innerHTML = '<div style="color: var(--text3); font-size:13px;">No configured instances.</div>';
     return;
   }
   grid.innerHTML = data.map(w => `
     <div class="card">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
-        <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:${w.color};"></span>
-        <button onclick="deleteWorld('${w.id}')" style="color:#ef4444;"><i data-lucide="trash-2" style="width:14px;"></i></button>
+        <span style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase;">ACTIVE</span>
+        <button onclick="deleteWorld('${w.id}')" style="color:#f87171;"><i data-lucide="trash-2" style="width:14px;"></i></button>
       </div>
-      <h3>${w.name}</h3>
-      <p style="font-size:11px; color: var(--text2); margin-bottom:12px;">${w.role}</p>
-      <button class="btn secondary" style="width:100%; font-size:11px;" onclick="startWorldChat('${w.name}')"><i data-lucide="message-square" style="width:12px;"></i> Launch Chat</button>
+      <h3 style="font-size:15px; margin-bottom:4px;">${w.name}</h3>
+      <p style="font-size:12px; color: var(--text2); margin-bottom:14px;">${w.role || 'General Assistant'}</p>
+      <button class="btn secondary" style="width:100%; font-size:12px;" onclick="startWorldChat('${w.name}')"><i data-lucide="message-square" style="width:12px;"></i> Connect Stream</button>
     </div>
   `).join('');
   if (window.lucide) lucide.createIcons();
@@ -1006,12 +912,11 @@ async function createWorld() {
   if (!currentUser) { nav('login'); return; }
   const name = document.getElementById('worldName').value;
   const role = document.getElementById('worldRole').value;
-  const color = document.getElementById('worldColor').value;
   if (!name) return;
 
   await supabaseClient.from('worlds').insert({
     user_id: currentUser.id,
-    name, role, color, status: 'active'
+    name, role, status: 'active'
   });
 
   document.getElementById('worldName').value = '';
@@ -1020,145 +925,164 @@ async function createWorld() {
 }
 
 async function deleteWorld(id) {
-  if (confirm("Are you sure you want to remove this world?")) {
+  if (confirm("Decommission this world instance?")) {
     await supabaseClient.from('worlds').delete().eq('id', id);
     loadWorldsData();
   }
 }
 
-// Forum Loader
+// Forums Loader
 async function loadForumsData() {
   const { data } = await supabaseClient.from('forum_categories').select('*').order('sort_order', { ascending: true });
   const grid = document.getElementById('forumsGrid');
   if (!data || data.length === 0) {
-    grid.innerHTML = '<div style="color: var(--text3); font-size:12px;">No forum categories available.</div>';
+    grid.innerHTML = '<div style="color: var(--text3); font-size:13px;">No forum topics available.</div>';
     return;
   }
   grid.innerHTML = data.map(f => `
     <div class="card">
-      <h3>${f.name}</h3>
-      <p style="font-size: 12px; color: var(--text2); margin-top: 4px;">${f.description}</p>
+      <h3 style="font-size:15px; margin-bottom:4px;">${f.name}</h3>
+      <p style="font-size: 13px; color: var(--text2);">${f.description}</p>
     </div>
   `).join('');
 }
 
-// Chat Implementation for Mobile First Layout
+// Full Chat Interface Logic
 async function loadConversationsData() {
   if (!currentUser) return;
   const { data } = await supabaseClient.from('conversations').select('*').order('updated_at', { ascending: false });
-  const list = document.getElementById('mobileChatList');
+  const list = document.getElementById('conversationList');
   if (!data || data.length === 0) return;
 
-  const dynamicRows = data.map(c => `
-    <div class="m-chat-row ${currentConvId === c.id ? 'active' : ''}" onclick="selectConversation('${c.id}', '${c.title}')">
-      <div class="avatar-wrap">
-        <img src="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png" class="avatar-img" alt="Avatar">
-      </div>
-      <div class="m-chat-info">
-        <div class="m-chat-top">
-          <span class="m-chat-title">${c.title || 'Chat'}</span>
-          <span class="m-chat-time">Now</span>
+  list.innerHTML = data.map(c => `
+    <div class="cs-item ${currentConvId === c.id ? 'active' : ''}" onclick="selectWorkspaceChat('${c.title}', 'Active Session', '${c.id}')">
+      <div class="cs-avatar">${(c.title || 'C').charAt(0).toUpperCase()}</div>
+      <div class="cs-info">
+        <div class="cs-top">
+          <span class="cs-name">${c.title || 'Chat'}</span>
+          <span class="cs-time">Active</span>
         </div>
-        <div class="m-chat-preview">Tap to view conversation...</div>
+        <div class="cs-preview">Click to join session stream...</div>
       </div>
     </div>
   `).join('');
-
-  list.innerHTML = dynamicRows;
-  if (window.lucide) lucide.createIcons();
 }
 
-async function newConversation() {
-  if (!currentUser) { nav('login'); return; }
-  const title = prompt("Enter Chat Title:", "New World Thread");
-  if (!title) return;
-  const { data } = await supabaseClient.from('conversations').insert({
-    title, creator_id: currentUser.id
-  }).select().single();
-  
-  if (data) selectConversation(data.id, data.title);
+function selectWorkspaceChat(title, statusText, convId = null) {
+  document.getElementById('activeChatTitle').innerText = title;
+  document.getElementById('activeChatStatus').innerText = statusText;
+  document.getElementById('chatWorkspace').classList.add('open-conversation');
+  document.getElementById('backToChatList').style.display = 'block';
+
+  if (convId) {
+    currentConvId = convId;
+    fetchConversationMessages(convId);
+  }
 }
 
-async function startWorldChat(worldName) {
-  if (!currentUser) { nav('login'); return; }
-  const { data } = await supabaseClient.from('conversations').insert({
-    title: 'Chat with ' + worldName,
-    creator_id: currentUser.id
-  }).select().single();
-  
-  nav('chat');
-  if (data) selectConversation(data.id, data.title);
+function closeWorkspaceChat() {
+  document.getElementById('chatWorkspace').classList.remove('open-conversation');
+  document.getElementById('backToChatList').style.display = 'none';
 }
 
-function openMobileConversation(title, avatar) {
-  document.getElementById('mActiveChatTitle').innerText = title;
-  document.getElementById('mobileChatView').classList.add('active');
-}
-
-function closeMobileConversation() {
-  document.getElementById('mobileChatView').classList.remove('active');
-}
-
-async function selectConversation(id, title) {
-  currentConvId = id;
-  openMobileConversation(title);
-  
+async function fetchConversationMessages(convId) {
   if (realTimeChannel) supabaseClient.removeChannel(realTimeChannel);
 
-  const { data } = await supabaseClient.from('messages').select('*').eq('conversation_id', id).order('created_at', { ascending: true });
+  const { data } = await supabaseClient.from('messages').select('*').eq('conversation_id', convId).order('created_at', { ascending: true });
   renderMessages(data || []);
 
-  realTimeChannel = supabaseClient.channel(`public:messages:conversation_id=eq.${id}`)
-    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `conversation_id=eq.${id}` }, payload => {
+  realTimeChannel = supabaseClient.channel(`public:messages:conversation_id=eq.${convId}`)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `conversation_id=eq.${convId}` }, payload => {
       appendSingleMessage(payload.new);
     })
     .subscribe();
 }
 
 function renderMessages(msgs) {
-  const container = document.getElementById('mChatMessages');
+  const container = document.getElementById('chatMessagesArea');
   if (msgs.length === 0) {
-    container.innerHTML = '<div style="text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px;">No messages in this channel yet.</div>';
+    container.innerHTML = '<div style="text-align: center; color: var(--text3); font-size: 12px; margin-top: 40px;">No messages recorded in this stream context.</div>';
     return;
   }
   container.innerHTML = msgs.map(m => `
-    <div class="msg-group ${m.sender_id === currentUser?.id ? 'me' : 'them'}">
-      <span class="msg-ts">${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-      <div class="msg-bubble">${m.content}</div>
+    <div class="chat-bubble-group ${m.sender_id === currentUser?.id ? 'me' : 'them'}">
+      <div class="chat-bubble-meta">
+        <span>${m.sender_id === currentUser?.id ? 'You' : 'Agent'}</span>
+        <span>${new Date(m.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+      </div>
+      <div class="chat-bubble">${m.content}</div>
     </div>
   `).join('');
   container.scrollTop = container.scrollHeight;
 }
 
 function appendSingleMessage(m) {
-  const container = document.getElementById('mChatMessages');
+  const container = document.getElementById('chatMessagesArea');
   const group = document.createElement('div');
-  group.className = `msg-group ${m.sender_id === currentUser?.id ? 'me' : 'them'}`;
+  group.className = `chat-bubble-group ${m.sender_id === currentUser?.id ? 'me' : 'them'}`;
   group.innerHTML = `
-    <span class="msg-ts">${new Date(m.created_at || Date.now()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
-    <div class="msg-bubble">${m.content}</div>
+    <div class="chat-bubble-meta">
+      <span>${m.sender_id === currentUser?.id ? 'You' : 'Agent'}</span>
+      <span>${new Date(m.created_at || Date.now()).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+    </div>
+    <div class="chat-bubble">${m.content}</div>
   `;
   container.appendChild(group);
   container.scrollTop = container.scrollHeight;
 }
 
-async function sendMobileMessage() {
-  const input = document.getElementById('mChatInput');
+async function sendChatMessage() {
+  const input = document.getElementById('chatInput');
   const content = input.value.trim();
   if (!content) return;
 
+  input.value = '';
+
   if (!currentConvId || !currentUser) {
     appendSingleMessage({ sender_id: 'me', content, created_at: new Date() });
-    input.value = '';
     return;
   }
 
-  input.value = '';
   await supabaseClient.from('messages').insert({
     conversation_id: currentConvId,
     sender_id: currentUser.id,
     content
   });
+}
+
+async function newConversation() {
+  if (!currentUser) { nav('login'); return; }
+  const title = prompt("Enter conversation title:", "New Channel Thread");
+  if (!title) return;
+  const { data } = await supabaseClient.from('conversations').insert({
+    title, creator_id: currentUser.id
+  }).select().single();
+  
+  if (data) {
+    await loadConversationsData();
+    selectWorkspaceChat(data.title, 'Active Session', data.id);
+  }
+}
+
+async function startWorldChat(worldName) {
+  if (!currentUser) { nav('login'); return; }
+  const { data } = await supabaseClient.from('conversations').insert({
+    title: worldName + ' Stream',
+    creator_id: currentUser.id
+  }).select().single();
+  
+  nav('chat');
+  if (data) selectWorkspaceChat(data.title, 'Active Session', data.id);
+}
+
+// Documentation Smooth Scroll
+function scrollToDoc(id) {
+  document.querySelectorAll('.docs-menu-item').forEach(e => e.classList.remove('active'));
+  event.target.classList.add('active');
+  const target = document.getElementById(id);
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 </script>
 </body>
