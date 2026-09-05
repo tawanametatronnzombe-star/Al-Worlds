@@ -6,9 +6,18 @@
 <meta name="theme-color" content="#02050a">
 <title>Al Worlds</title>
 <link rel="icon" href="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png">
+
+<!-- Resource hints for faster font & image loads -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png">
+
 <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://unpkg.com/lucide@latest"></script>
+
+<!-- Deferred external scripts to unblock HTML parsing -->
+<script src="https://unpkg.com/lucide@latest" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
 :root {
   --bg: #02050a;
@@ -163,7 +172,7 @@ a { color: inherit; text-decoration: none; }
 
 <!-- Loading Overlay -->
 <div id="loadingOverlay">
-  <div class="loading-logo"><img src="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png" alt="Logo"></div>
+  <div class="loading-logo"><img src="https://i.postimg.cc/Jzqy36Pg/file-0000000046b88208a4fbcb9fd2eb078f.png" alt="Logo" loading="eager" fetchpriority="high"></div>
   <div class="loading-text">Al Worlds</div>
   <div class="loading-sub" id="loadStatus">Initializing...</div>
   <div class="loading-track"><div class="loading-track-inner" id="loadProgress"></div></div>
@@ -734,12 +743,10 @@ async function handleLogout() {
   nav('landing');
 }
 
-// Profile Loader
+// Fixed Profile Loader (removed syntax errors / broken references)
 async function loadProfileData() {
   if (!currentUser) { nav('login'); return; }
   const { data } = await supabaseClient.from('profiles').select('*').eq('id', currentUser.id).single();
-  if (data) {
-    document.getElementById('profileName').innerText = data.dist('*').eq('id', currentUser.id).single();
   if (data) {
     document.getElementById('profileName').innerText = data.display_name || currentUser.email;
     document.getElementById('profileHandle').innerText = '@' + (data.username || 'user');
