@@ -724,7 +724,9 @@ async function handleForgot() {
   const email = document.getElementById('forgotEmail').value;
   const err = document.getElementById('forgotErr');
   err.style.display = 'none';
-  const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://tawanametatronnzombe-star.github.io/Al-Worlds/'
+  });
   if (error) {
     err.innerText = error.message;
     err.style.display = 'block';
@@ -735,7 +737,12 @@ async function handleForgot() {
 }
 
 async function handleOAuth(provider) {
-  await supabaseClient.auth.signInWithOAuth({ provider });
+  await supabaseClient.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: 'https://tawanametatronnzombe-star.github.io/Al-Worlds/'
+    }
+  });
 }
 
 async function handleLogout() {
@@ -743,7 +750,7 @@ async function handleLogout() {
   nav('landing');
 }
 
-// Fixed Profile Loader (removed syntax errors / broken references)
+// Profile Loader
 async function loadProfileData() {
   if (!currentUser) { nav('login'); return; }
   const { data } = await supabaseClient.from('profiles').select('*').eq('id', currentUser.id).single();
