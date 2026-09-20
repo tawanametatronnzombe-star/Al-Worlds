@@ -16,19 +16,13 @@
   "icons": [
     {
       "src": "https://tawanametatronnzombe-star.github.io/Al-Worlds/logo.png",
-      "sizes": "192x192",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any"
     },
     {
       "src": "https://tawanametatronnzombe-star.github.io/Al-Worlds/logo.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "https://tawanametatronnzombe-star.github.io/Al-Worlds/logo.png",
-      "sizes": "512x512",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "maskable"
     }
